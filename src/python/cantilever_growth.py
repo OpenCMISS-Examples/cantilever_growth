@@ -299,10 +299,12 @@ equationsSet.CreateFinish()
 equationsSet.DependentCreateStart(dependentFieldUserNumber,dependentField)
 equationsSet.DependentCreateFinish()
 
+path=os.path.dirname(os.path.abspath(__file__))
+
 # Create the CellML environment for the growth law. Set the rates as known so that we can spatially vary them.
 growthCellML = iron.CellML()
 growthCellML.CreateStart(growthCellMLUserNumber,region)
-growthCellMLIdx = growthCellML.ModelImport("stressgrowth.cellml")
+growthCellMLIdx = growthCellML.ModelImport(os.path.join(path,"stressgrowth.cellml"))
 growthCellML.VariableSetAsKnown(growthCellMLIdx,"Main/bff")
 growthCellML.VariableSetAsKnown(growthCellMLIdx,"Main/bss")
 growthCellML.VariableSetAsKnown(growthCellMLIdx,"Main/bnn")
@@ -359,7 +361,7 @@ growthCellML.StateFieldCreateFinish()
 # Create the CellML environment for the consitutative law
 constituativeCellML = iron.CellML()
 constituativeCellML.CreateStart(constituativeCellMLUserNumber,region)
-constituativeCellMLIdx = constituativeCellML.ModelImport("mooneyrivlin.cellml")
+constituativeCellMLIdx = constituativeCellML.ModelImport(os.path.join(path,"mooneyrivlin.cellml"))
 constituativeCellML.VariableSetAsKnown(constituativeCellMLIdx,"equations/C11")
 constituativeCellML.VariableSetAsKnown(constituativeCellMLIdx,"equations/C12")
 constituativeCellML.VariableSetAsKnown(constituativeCellMLIdx,"equations/C13")
